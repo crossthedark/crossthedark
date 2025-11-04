@@ -1,0 +1,564 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crossing the Darkness: Ukrainian Music for Saxophone and Piano</title>
+    <meta name="description" content="Roman Fotuima & Daria Shutko duo - Crossing the Darkness album">
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Crossing the Darkness: Ukrainian Music for Saxophone and Piano">
+    <meta property="og:description" content="Roman Fotuima & Daria Shutko duo">
+    <meta property="og:image" content="cover.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Crossing the Darkness: Ukrainian Music for Saxophone and Piano">
+    <meta property="twitter:description" content="Roman Fotuima & Daria Shutko duo">
+    <meta property="twitter:image" content="cover.jpg">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: hsl(220, 15%, 12%);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Background image */
+        .album-cover-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('background-desktop.png');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        @media (max-width: 768px) {
+            .album-cover-bg {
+                background-image: url('mobile-background.png');
+            }
+        }
+
+        /* Main content */
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        /* Album cover section */
+        .album-cover-container {
+            margin-bottom: 1.5rem;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .album-cover-wrapper {
+            position: relative;
+            width: 192px;
+            height: 192px;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (min-width: 768px) {
+            .album-cover-wrapper {
+                width: 256px;
+                height: 256px;
+            }
+        }
+
+        .album-cover-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Play button overlay */
+        .play-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .album-cover-container:hover .play-overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .play-button-inner {
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 9999px;
+            padding: 1rem;
+            transition: all 0.2s;
+        }
+
+        .album-cover-container:hover .play-button-inner {
+            transform: scale(1.1);
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .play-icon, .pause-icon {
+            width: 28px;
+            height: 28px;
+            color: white;
+            fill: white;
+        }
+
+        @media (min-width: 768px) {
+            .play-icon, .pause-icon {
+                width: 32px;
+                height: 32px;
+            }
+        }
+
+        .play-icon {
+            margin-left: 2px;
+        }
+
+        /* Title section */
+        .title-section {
+            text-align: center;
+            margin-bottom: 0.5rem;
+            max-width: 46rem;
+        }
+
+        .title-section h1 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            line-height: 1.25;
+            color: white;
+        }
+
+        @media (min-width: 768px) {
+            .title-section h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .title-section p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 0.25rem;
+            font-weight: 500;
+        }
+
+        @media (min-width: 768px) {
+            .title-section p {
+                font-size: 1.125rem;
+            }
+        }
+
+        /* Music service buttons */
+        .music-services {
+            width: 100%;
+            max-width: 28rem;
+            margin-bottom: 2rem;
+        }
+
+        .services-header {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            padding: 0.5rem 1rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .services-container {
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-button {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: transparent;
+            color: white;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .service-button:last-child {
+            border-bottom: none;
+        }
+
+        .service-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .service-button-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .service-icon-container {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .service-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .service-button-right {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .service-play-text {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.2s;
+        }
+
+        .service-button:hover .service-play-text {
+            color: white;
+        }
+
+        .service-arrow {
+            width: 20px;
+            height: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.2s;
+        }
+
+        .service-button:hover .service-arrow {
+            color: white;
+        }
+
+        /* Album description */
+        .album-description {
+            width: 100%;
+            max-width: 48rem;
+            margin-top: 2rem;
+        }
+
+        .description-section {
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .description-button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: left;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .chevron-icon {
+            width: 20px;
+            height: 20px;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        .chevron-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        .description-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .description-content.open {
+            max-height: 2000px;
+            margin-top: 1rem;
+        }
+
+        .description-content p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .description-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .description-content p.font-medium {
+            font-weight: 500;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background image -->
+    <div class="album-cover-bg"></div>
+    
+    <!-- Main content -->
+    <div class="container">
+        <!-- Album cover with play button -->
+        <div class="album-cover-container" id="albumCover">
+            <div class="album-cover-wrapper">
+                <img src="cover.jpg" alt="Crossing the Darkness album cover">
+                <div class="play-overlay">
+                    <div class="play-button-inner">
+                        <svg class="play-icon" id="playIcon" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        <svg class="pause-icon" id="pauseIcon" style="display: none;" viewBox="0 0 24 24">
+                            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Title -->
+        <div class="title-section">
+            <h1>Crossing the Darkness: Ukrainian Music for Saxophone and Piano</h1>
+            <p>Roman Fotuima & Daria Shutko duo</p>
+        </div>
+
+        <!-- Music service buttons -->
+        <div class="music-services">
+            <div class="services-header">Listen here:</div>
+            <div class="services-container">
+                <a href="https://youtube.com/playlist?list=OLAK5uy_nR8uuQVtHU7z-gIdrFRqBjAv-kMg1Ct8k&si=_MaNfBy_nQqcDFEm" target="_blank" rel="noopener noreferrer" class="service-button">
+                    <div class="service-button-left">
+                        <div class="service-icon-container" style="background-color: #FF0000;">
+                            <svg class="service-icon" viewBox="0 0 24 24" fill="white">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </div>
+                        <span>YouTube</span>
+                    </div>
+                    <div class="service-button-right">
+                        <span class="service-play-text">Play</span>
+                        <svg class="service-arrow" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </a>
+                
+                <a href="https://music.youtube.com/playlist?list=OLAK5uy_nOSecEg4f4Ddw9BdkeSdEa_RRYxSlIZJo" target="_blank" rel="noopener noreferrer" class="service-button">
+                    <div class="service-button-left">
+                        <div class="service-icon-container" style="background-color: #FF0000;">
+                            <svg class="service-icon" viewBox="0 0 24 24" fill="white">
+                                <path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-13.332c-3.432 0-6.228 2.796-6.228 6.228S8.568 18.228 12 18.228s6.228-2.796 6.228-6.228S15.432 5.772 12 5.772zM9.684 15.54V8.46L15.816 12l-6.132 3.54z"/>
+                            </svg>
+                        </div>
+                        <span>YouTube Music</span>
+                    </div>
+                    <div class="service-button-right">
+                        <span class="service-play-text">Play</span>
+                        <svg class="service-arrow" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </a>
+                
+                <a href="https://open.spotify.com/album/64BoQGLI0pZKlqxLycF9TN?si=xPbZRxBhRc-CrmN9RlXrXQ" target="_blank" rel="noopener noreferrer" class="service-button">
+                    <div class="service-button-left">
+                        <div class="service-icon-container" style="background-color: #1DB954;">
+                            <svg class="service-icon" viewBox="0 0 24 24" fill="white">
+                                <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                            </svg>
+                        </div>
+                        <span>Spotify</span>
+                    </div>
+                    <div class="service-button-right">
+                        <span class="service-play-text">Play</span>
+                        <svg class="service-arrow" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </a>
+                
+                <a href="https://music.apple.com/ua/album/crossing-the-darkness-ukrainian-music-for-saxophone/1843566944?l=uk" target="_blank" rel="noopener noreferrer" class="service-button">
+                    <div class="service-button-left">
+                        <div class="service-icon-container" style="background-color: #FA2D48;">
+                            <img src="apple-music-icon.png" alt="Apple Music" class="service-icon">
+                        </div>
+                        <span>Apple Music</span>
+                    </div>
+                    <div class="service-button-right">
+                        <span class="service-play-text">Play</span>
+                        <svg class="service-arrow" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </a>
+                
+                <a href="https://www.deezer.com/uk/album/831519491" target="_blank" rel="noopener noreferrer" class="service-button">
+                    <div class="service-button-left">
+                        <div class="service-icon-container" style="background-color: #FF0092;">
+                            <svg class="service-icon" viewBox="0 0 24 24" fill="white">
+                                <path d="M18.81 5.63v2.75h5.19v-2.75h-5.19zm0 3.5v2.75h5.19v-2.75h-5.19zm0 3.5v2.75h5.19v-2.75h-5.19zm0 3.5v2.75h5.19v-2.75h-5.19zm-6.06-10.5v2.75h5.19v-2.75h-5.19zm0 3.5v2.75h5.19v-2.75h-5.19zm0 3.5v2.75h5.19v-2.75h-5.19zm0 3.5v2.75h5.19v-2.75h-5.19zm-6.06-6.99v2.75h5.19v-2.75h-5.19zm0 3.5v2.75h5.19v-2.75h-5.19zm0 3.5v2.75h5.19v-2.75h-5.19zm-6.06-3.5v2.75h5.19v-2.75h-5.19zm0 3.5v2.75h5.19v-2.75h-5.19z"/>
+                            </svg>
+                        </div>
+                        <span>Deezer</span>
+                    </div>
+                    <div class="service-button-right">
+                        <span class="service-play-text">Play</span>
+                        <svg class="service-arrow" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Album description -->
+        <div class="album-description">
+            <!-- Ukrainian Section -->
+            <div class="description-section">
+                <button class="description-button" id="ukrainianButton">
+                    <span>Про альбом</span>
+                    <svg class="chevron-icon" id="ukrainianChevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="description-content" id="ukrainianContent">
+                    <p>«Перетинаючи темряву» – перша цілісна аудіо добірка творів українських композиторів, які у своїй творчості звертаються до тандему саксофона і фортепіано. Представлені на диску автори працюють у різних естетичних системах, кожен із них має власну звукову мову, тож по-своєму розкривають потенціал інструментів.</p>
+                    
+                    <p>Вибрані композиції репрезентують один із найяскравіших пластів українського репертуару для саксофона і фортепіано, поєднують творчість композиторів різних поколінь, та одночасно демонструють багатство стилістичних напрямів сучасної музики.</p>
+                    
+                    <p>Ідея альбому постала взимку 2022-2023 років, у період перших масованих блекаутів в Україні, які, як і вся війна, залишають по собі тривалі й глибокі емоційні наслідки. Структура програми вибудувана таким чином, щоб провести слухача крізь темряву до внутрішнього світла: разом із виконавцями прожити шлях від тривоги й напруги до просвітленої рівноваги.</p>
+                    
+                    <p>Добірку свідомо вибудувано у траєкторії від авангардних та експериментальних творів до музики, доступнішої для ширшої аудиторії. Якщо перші треки видадуться непідготовленому слухачеві складними для сприйняття, можна без вагань перейти до наступних і повернутися до попередніх згодом.</p>
+                    
+                    <p class="font-medium">«Перетинаючи темряву» це запрошення до глибшого пізнання української музики, до відкриття багатства виразових можливостей тандему саксофона і фортепіано, а також до емоційного діалогу, що відображає складну, але гідну подолання дійсність нашого часу.</p>
+                </div>
+            </div>
+
+            <!-- English Section -->
+            <div class="description-section">
+                <button class="description-button" id="englishButton">
+                    <span>About the Album</span>
+                    <svg class="chevron-icon" id="englishChevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="description-content" id="englishContent">
+                    <p>"Crossing the Darkness" is the first cohesive audio collection of works by Ukrainian composers who, in their creative practice, turn to the tandem of saxophone and piano. The composers featured on the album work within different aesthetic systems, each with a distinct musical language, and thus reveal the instruments' potential in their own way. The selected pieces represent one of the most vivid strata of Ukrainian repertoire for saxophone and piano, bringing together composers of different generations while simultaneously showcasing the richness of stylistic currents in contemporary music.</p>
+                    
+                    <p>The idea for the album arose in the winter of 2022-2023, during the first widespread blackouts in Ukraine, which like the war itself leave lasting and profound emotional traces. The program is structured to guide the listener through darkness toward an inner light: to share with the performers a journey from anxiety and tension to a lucid equilibrium. The selection is deliberately arranged along a trajectory from avant-garde and experimental works to music more accessible to a wider audience. If the opening tracks seem challenging to an unprepared listener, one can readily proceed to the subsequent pieces and return to the earlier ones later.</p>
+                    
+                    <p class="font-medium">"Crossing the Darkness" is an invitation to a deeper encounter with Ukrainian music, to the discovery of the expressive wealth of the saxophone-piano duo, and to an emotional dialogue that reflects the complex, yet surmountable reality of our time.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio element -->
+    <audio id="audioPlayer" src="preview.mp3"></audio>
+
+    <script>
+        // Audio player functionality
+        const albumCover = document.getElementById('albumCover');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const audioPlayer = document.getElementById('audioPlayer');
+        let isPlaying = false;
+
+        albumCover.addEventListener('click', function() {
+            if (isPlaying) {
+                audioPlayer.pause();
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+                isPlaying = false;
+            } else {
+                audioPlayer.play();
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+                isPlaying = true;
+            }
+        });
+
+        audioPlayer.addEventListener('ended', function() {
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+            isPlaying = false;
+        });
+
+        // Accordion functionality
+        function setupAccordion(buttonId, contentId, chevronId) {
+            const button = document.getElementById(buttonId);
+            const content = document.getElementById(contentId);
+            const chevron = document.getElementById(chevronId);
+
+            button.addEventListener('click', function() {
+                const isOpen = content.classList.contains('open');
+                
+                if (isOpen) {
+                    content.classList.remove('open');
+                    chevron.classList.remove('rotated');
+                } else {
+                    content.classList.add('open');
+                    chevron.classList.add('rotated');
+                }
+            });
+        }
+
+        setupAccordion('ukrainianButton', 'ukrainianContent', 'ukrainianChevron');
+        setupAccordion('englishButton', 'englishContent', 'englishChevron');
+    </script>
+</body>
+</html>
