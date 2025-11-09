@@ -282,7 +282,6 @@
         .album-description {
             width: 100%;
             max-width: 48rem;
-            margin-top: 2rem;
         }
 
         .description-section {
@@ -350,7 +349,7 @@
         /* Tracklist */
         .tracklist {
             width: 100%;
-            max-width: 46rem;
+            max-width: 48rem;
         }
 
         .tracklist-container {
@@ -375,16 +374,29 @@
         }
 
         .tracklist-item {
-            display: grid;
-            grid-template-columns: 240px 1fr;
-            gap: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
             color: rgba(255, 255, 255, 0.9);
+        }
+
+        @media (min-width: 768px) {
+            .tracklist-item {
+                display: grid;
+                grid-template-columns: 240px 1fr;
+                gap: 1rem;
+            }
         }
 
         .tracklist-composer {
             font-weight: 600;
             color: white;
-            white-space: nowrap;
+        }
+
+        @media (min-width: 768px) {
+            .tracklist-composer {
+                white-space: nowrap;
+            }
         }
 
         .tracklist-tracks {
