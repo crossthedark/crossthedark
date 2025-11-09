@@ -178,8 +178,13 @@
         /* Music service buttons */
         .music-services {
             width: 100%;
-            max-width: 28rem;
-            margin-bottom: 2rem;
+            /* max-width: 48rem; */
+        }
+
+        @media (min-width: 1024px) {
+            .music-services {
+                max-width: none;
+            }
         }
 
         .services-header {
@@ -192,8 +197,8 @@
             font-size: 1rem;
             font-weight: 600;
             color: white;
-            margin-bottom: 0.5rem;
-            margin-top: 1rem;
+            margin-bottom: 1rem;
+            /* margin-top: 1rem; */
         }
 
         .services-container {
@@ -209,7 +214,7 @@
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            padding: 1rem 1.25rem;
+            padding: 1.185rem 1.25rem;
             background: transparent;
             color: white;
             border: none;
@@ -282,6 +287,7 @@
         .album-description {
             width: 100%;
             max-width: 48rem;
+            margin-top: 2rem;
         }
 
         .description-section {
@@ -346,10 +352,27 @@
             color: white;
         }
 
+        /* Content Grid (Tracklist + Music Services Side-by-Side) */
+        .content-grid {
+            width: 100%;
+            max-width: 75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .content-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+                align-items: start;
+            }
+        }
+
         /* Tracklist */
         .tracklist {
             width: 100%;
-            max-width: 48rem;
         }
 
         .tracklist-container {
@@ -364,7 +387,7 @@
             font-size: 1.25rem;
             font-weight: bold;
             color: white;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
         }
 
         .tracklist-items {
@@ -384,7 +407,7 @@
             .tracklist-item {
                 display: grid;
                 grid-template-columns: 240px 1fr;
-                gap: 1rem;
+                /* gap: 1rem; */
             }
         }
 
@@ -440,9 +463,11 @@
             <p>Roman Fotuima & Daria Shutko duo</p>
         </div>
 
-        <!-- Tracklist -->
-        <div class="tracklist">
-            <div class="tracklist-container">
+        <!-- Tracklist and Music Services Container -->
+        <div class="content-grid">
+            <!-- Tracklist -->
+            <div class="tracklist">
+                <div class="tracklist-container">
                 <h2 class="tracklist-title">TRACKLIST:</h2>
                 
                 <div class="tracklist-items">
@@ -590,6 +615,7 @@
                     </div>
                 </a>
             </div>
+        </div>
         </div>
 
         <!-- Album description -->
